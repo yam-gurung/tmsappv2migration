@@ -14,11 +14,11 @@ import { AsyncPipe } from '@angular/common';
 export class Menu implements OnInit {
   //isUserLoggedIn:boolean=false;
   isLoggedIn$:Observable<boolean>;
-  authenticatedUser:string|null="";
-  constructor(private basicAuthenticationService:BasicAuthenticationService){
+  //authenticatedUser:string|null;
+  constructor(public basicAuthenticationService:BasicAuthenticationService){
     //this.isUserLoggedIn = this.basicAuthenticationService.isUserLoggedIn();
     this.isLoggedIn$=this.basicAuthenticationService.isLoggedIn$
-    this.authenticatedUser = this.basicAuthenticationService.getAuthenticatedUser();
+    //this.authenticatedUser = this.basicAuthenticationService.getAuthenticatedUser();
   }
   ngOnInit(){
     }

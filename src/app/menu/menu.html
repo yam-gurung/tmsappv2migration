@@ -7,7 +7,7 @@
       @if(isLoggedIn$ | async){ <li class="nav-item">
        <a
           class="nav-link"
-          routerLink="/welcome/{{authenticatedUser}}">Home</a
+          routerLink="/welcome/{{this.basicAuthenticationService.getAuthenticatedUser()}}">Home</a
         >
       </li>
     

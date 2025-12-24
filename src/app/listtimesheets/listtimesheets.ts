@@ -9,7 +9,7 @@ export class TimesheetDTO{
     constructor(
         public id:number,
         public project:string,
-        public loginDate:Date,
+        public loginDate:string,
         public loggedHr:number,
         public username?:string
     ){}
