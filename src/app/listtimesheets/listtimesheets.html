@@ -1,0 +1,50 @@
+<h1>Timesheets</h1>
+@if(message){
+<div class="alert alert-success">{{message}}</div>
+}
+<p>
+    <input 
+    #query
+    (keyup)="filter(query.value)"
+    type="type"
+    class="form-control"
+    placeholder="Search..."
+    />
+</p>
+<div class="container">
+<table class="mat-table" width="100%">
+    <thead>
+        <tr class="mat-header-row">
+            <th class="mat-header-cell">Project</th>
+            <th class="mat-header-cell">Logged Date</th>
+            <th class="mat-header-cell">Logged Hr</th>
+            <th class="mat-header-cell">Update</th>
+            <th class="mat-header-cell">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+         @for (timesheet of filteredTimesheets;track timesheet.id){
+        <tr class="mat-row">
+           <td class="mat-cell">{{timesheet.id}}</td>
+            <td class="mat-cell">{{timesheet.project}}</td>
+            <td class="mat-cell">{{timesheet.loginDate|date:'yyyy-MM-dd'}}</td>
+            <td class="mat-cell">{{timesheet.loggedHr}}</td>
+            <td><button (click)="updateTimesheet(timesheet.id)"
+            class="btn btn-success">Update</button></td>
+            <td> <button (click)="deleteTimesheet(timesheet.id)"
+            class="btn btn-success">Delete</button><td>
+        </tr>}
+    </tbody>
+</table>
+<mat-paginator 
+[pageSizeOptions]="[10,25,100]"
+[pageSize]="10"
+[length]="totalElements"
+(page)="nextPage($event)"
+>
+
+</mat-paginator>
+<div>
+    <button class="btn btn-success" (click)="addTimesheet()">Add Timesheet</button>
+</div>
+</div>

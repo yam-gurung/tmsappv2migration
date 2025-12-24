@@ -1,0 +1,48 @@
+<H1>Add User</H1>
+<div class="container">
+<form (ngSubmit)="signup()">
+    <fieldset class="form-group">
+        <input type="text"
+        [(ngModel)]="securityUser.firstname"
+        class="form-control"
+        name="firstname"
+        required
+        placeholder="First Name"/>
+        </fieldset>
+    <fieldset class="form-group">
+        <input type="text"
+        class="form-control"
+        [(ngModel)]="securityUser.lastname"
+        name="lastname"
+        required
+        placeholder="Last Name"/>
+    </fieldset>
+    <fieldset class="form-group">
+        <input type="text"
+        class="form-control"
+        [(ngModel)]="securityUser.username"
+        name="username"
+        required
+        placeholder="User Name"/>
+    </fieldset>
+    <fieldset class="form-group">
+        <input type="password"
+        [(ngModel)]="securityUser.password"
+        class="form-control"
+        name="password"
+        required
+        placeholder="Password"/>
+    </fieldset>
+    <fieldset class="form-group">
+        <label for="rolename">Role</label>
+        <input type="text"
+        [(ngModel)]="securityUser.rolename"
+        class="form-control"
+        name="rolename"
+        required
+        placeholder="ROLE_ADMIN/ROLE_USER"/>
+    </fieldset>
+
+    <button type="submit" class="btn btn-success">Sign Up</button>
+</form>
+</div>

@@ -1,0 +1,33 @@
+<H1>Timesheet</H1>
+<div class="container">
+    <form (ngSubmit)="saveTimesheet()">
+        <fieldset class="form-group">
+            <label>Project</label>
+            <input type="text"
+            class="form-control"
+            [(ngModel)]="timesheet.project" 
+            name="project"
+            required
+            minlength="5"/>
+        </fieldset>
+        <fieldset>
+            <label>Login Date</label>
+            <input type="date"
+            [ngModel]="timesheet.loginDate"
+            (ngModelChange)="timesheet.loginDate=$event"
+            class="form-control"
+            name="loginDate"
+            required/>
+        </fieldset>
+        <fieldset>
+            <label>Logged Hr</label>
+            <input type="number"
+            [(ngModel)]="timesheet.loggedHr"
+            class="form-control"
+            name="loggedHr"
+            required/>
+        </fieldset>
+
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+</div>
