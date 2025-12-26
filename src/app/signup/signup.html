@@ -35,12 +35,18 @@
     </fieldset>
     <fieldset class="form-group">
         <label for="rolename">Role</label>
-        <input type="text"
+        <select name="role" id="roleId" class="form-control" [(ngModel)]="securityUser.rolename">
+            <option [value]="securityUser.rolename" disabled selected>SELECT AN OPTION</option>
+            @for (role of roles;track role){
+            <option [value]="role.roleName">{{role.description}}</option>
+            }
+        </select>
+        <!--<input type="text"
         [(ngModel)]="securityUser.rolename"
         class="form-control"
         name="rolename"
         required
-        placeholder="ROLE_ADMIN/ROLE_USER"/>
+        placeholder="ROLE_ADMIN/ROLE_USER"/>-->
     </fieldset>
 
     <button type="submit" class="btn btn-success">Sign Up</button>

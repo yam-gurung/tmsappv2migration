@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Output} from '@angular/core'
-import {BasicAuthenticationService} from '../service/basic-authentication.service';
-import {OnInit} from '@angular/core';
+import { ChangeDetectorRef, Component,OnInit} from '@angular/core'
+import {AUTHENTICATED_USER, BasicAuthenticationService, TOKEN} from '../service/basic-authentication.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,10 +10,9 @@ import { Router } from '@angular/router';
 })
 
 export class Logout implements OnInit{
-    constructor(private route:Router,private basicAuthenticationService:BasicAuthenticationService){}
+    constructor(private basicAuthenticationService:BasicAuthenticationService){}
    // @Output() loggedOut: new EventEmitter<void>();
     ngOnInit(){
-        this.basicAuthenticationService.logout();
-        
-    }
+        //this.basicAuthenticationService.logout();
+        }
 }

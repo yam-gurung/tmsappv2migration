@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,OnInit,ChangeDetectorRef } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
@@ -18,13 +18,13 @@ export class Login implements OnInit {
 
   constructor(private router:Router,
     private basicAuthenticationService:BasicAuthenticationService
+    ,private cdr:ChangeDetectorRef
   ){}
 
   ngOnInit(){
-    this.errorMessage=="Invalid Credentails"
+    this.errorMessage="Invalid Credentials"
     this.invalidLogin=false;
-    this.username = this.basicAuthenticationService.getAuthenticatedUser();
-  }
+   }
 
   handleJWTAuthLogin(){
     this.basicAuthenticationService.executeJWTAuthenticationService(this.username,this.password)
@@ -35,8 +35,9 @@ export class Login implements OnInit {
         this.invalidLogin=false;
       },
       error:(error)=>{
-        console.log(error);
+        console.log("error log "+error);
         this.invalidLogin=true;
+        this.cdr.markForCheck();;
       },
       complete:()=>{
         console.log("JWT Authentication Complete");

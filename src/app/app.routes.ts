@@ -14,7 +14,7 @@ export const routes: Routes = [
     {path:"login",component:Login},
     {path:"success",component:Success,canActivate:[RouteGuardService]},
     {path:"welcome/:name",component:Welcome,canActivate:[RouteGuardService]},
-    {path:"logout",component:Logout,canActivate:[RouteGuardService]},
+    {path:"logout",component:Logout},
     {path:'signup',component:Signup,canActivate:[RouteGuardService]},
     {path:'timesheets',component:ListTimesheets,canActivate:[RouteGuardService]},
     {path:'timesheets/:id',component:Timesheet,canActivate:[RouteGuardService]},

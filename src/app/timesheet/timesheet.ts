@@ -19,6 +19,8 @@ export class Timesheet implements OnInit{
     id!:number;
     username!:string|null;;
     dateString:string|null=null;
+    options:string[]=
+    ['tms','tms development','tms support','tms testing'];
 
     constructor(
         private timesheetService:TimeSheetDataService,
