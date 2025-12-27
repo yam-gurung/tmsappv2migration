@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {JPA_API_URL} from '../../app.constants';
 import {TimesheetDTO, TimesheetResponseDTO} from '../../listtimesheets/listtimesheets';
-import { Observable } from 'rxjs';
+import { formatDate } from '@angular/common';
+import { TimesheetRequest } from '../../interfaces/timesheetrequest.interface';
 
 @Injectable({
     providedIn:'root'
@@ -31,12 +32,16 @@ export class TimeSheetDataService{
     }
 
     retrieveTimesheet(username:any,id:number){
-        return this.http.get<TimesheetDTO>(
+        return this.http.get<any>(
             `${JPA_API_URL}/users/${username}/timesheets/${id}`
         );
     }
 
     updateTimesheet(username:any,id:number,timesheet:TimesheetDTO){
+        timesheet.loginDate = formatDate(timesheet.loginDate, 'yyyy-MM-ddTHH:mm:ss.sssZ', 'en-US');
+
+        console.log("timesheet loginDate in service: "+timesheet.loginDate)
+        
         return this.http.put(
             `${JPA_API_URL}/users/${username}/timesheets/${id}`,
           timesheet
@@ -44,6 +49,10 @@ export class TimeSheetDataService{
     }
 
     createTimesheet(username:any,timesheet:TimesheetDTO){
+        console.log("date today "+new Date());
+        timesheet.loginDate = formatDate(timesheet.loginDate, 'yyyy-MM-ddTHH:mm:ss.sssZ', 'en-US');
+
+        console.log("timesheet loginDate in service: "+timesheet.loginDate)
         return this.http.post(
             `${JPA_API_URL}/users/${username}/timesheets`,
             timesheet

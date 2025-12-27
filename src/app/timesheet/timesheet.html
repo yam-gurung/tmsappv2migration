@@ -21,7 +21,7 @@
         <fieldset>
             <label>Login Date</label>
             <input type="date"
-            [ngModel]="timesheet.loginDate"
+            [ngModel]="timesheet.loginDate | date:'yyyy-MM-dd'"
             (ngModelChange)="timesheet.loginDate = $event"
             class="form-control"
             name="loginDate"

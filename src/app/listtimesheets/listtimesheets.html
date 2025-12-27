@@ -28,7 +28,7 @@
         <tr class="mat-row">
            <td class="mat-cell">{{timesheet.id}}</td>
             <td class="mat-cell">{{timesheet.project}}</td>
-            <td class="mat-cell">{{timesheet.loginDate|date:'yyyy-MM-dd':'UTC'}}</td>
+            <td class="mat-cell">{{timesheet.loginDate|date:'yyyy-MM-dd'}}</td>
             <td class="mat-cell">{{timesheet.loggedHr}}</td>
             <td><button (click)="updateTimesheet(timesheet.id)"
             class="btn btn-success">Update</button></td>
