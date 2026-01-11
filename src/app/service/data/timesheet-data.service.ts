@@ -19,6 +19,7 @@ export class TimeSheetDataService{
 
     listTimesheets(username:any,request:any){
         const params = request;
+        console.log("params in service: "+request.startDate+" "+request.endDate);
         return this.http.get<any>(
             `${JPA_API_URL}/users/${username}/timesheets`,
             {params}

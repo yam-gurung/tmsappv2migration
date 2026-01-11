@@ -1,14 +1,24 @@
-<H1>Jobs</H1>
+<H1 class="text-center">Jobs</H1>
 <div class="container">
     <table class="mat-table" width="100%">
         <thead>
             <tr><th>Job Name</th>
-                <th>Run</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            <tr><td>Timesheets</td>
-            <td><button (click)="executeJob()" class="btn btn-success">Execute</button></td></tr>
+            <tr>
+                <td>Timesheets</td>
+                <td><button (click)="executeTimesheetJob()" 
+                    class="btn btn-success">Execute</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Roles Data Load</td>
+                <td><button (click)="executeRolesDataLoadJob()"
+                    class="btn btn-success">Execute</button>
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>

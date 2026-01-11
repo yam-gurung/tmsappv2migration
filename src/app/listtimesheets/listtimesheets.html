@@ -2,7 +2,20 @@
 @if(message){
 <div class="alert alert-success">{{message}}</div>
 }
-<p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-8">
+            From Date: <input  type="date" [ngModel]="startDate | date:'yyyy-MM-dd'"
+            (ngModelChange)="startDate=$event" name="startDate">
+            To Date: <input  type="date" [ngModel]="endDate | date:'yyyy-MM-dd'"
+            (ngModelChange)="endDate=$event"
+            name="endDate">
+            <button class="btn btn-success" (click)="searchResult()">Apply</button>
+        </div>
+    </div>
+    </div>
+<div class="container">
     <input 
     #query
     (keyup)="filter(query.value)"
@@ -10,7 +23,7 @@
     class="form-control"
     placeholder="Search..."
     />
-</p>
+</div>
 <div class="container">
 <table class="mat-table" width="100%">
     <thead>

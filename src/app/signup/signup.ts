@@ -1,21 +1,22 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
 import {SecurityUser} from '../listusers/listusers';
 import {OnInit} from '@angular/core';
-import {SignupService} from '../service/data/signup.service';
+import {UserDataService} from '../service/data/user-data.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Role } from '../interfaces/role.interface';
 import { RoleDataService } from '../service/data/role-data.service';
+import { A11yModule } from "@angular/cdk/a11y";
 
 @Component({
     selector:'app-signup',
-    imports:[ReactiveFormsModule,FormsModule],
+    imports: [ReactiveFormsModule, FormsModule, A11yModule],
     templateUrl:'./signup.html',
     styleUrl:'./signup.css'
 })
 export class Signup implements OnInit{
     securityUser:SecurityUser=new SecurityUser("","","","","");
-    constructor(private signupService:SignupService,
+    constructor(private userDataService:UserDataService,
         private route:Router,
         private roleService:RoleDataService,
         private cdr: ChangeDetectorRef
@@ -32,7 +33,7 @@ export class Signup implements OnInit{
     roles:Role[]=[];
 
     signup(){
-        this.signupService.signup(this.securityUser)
+        this.userDataService.signup(this.securityUser)
         .subscribe((data)=>{
             this.route.navigate(['success'])
         });

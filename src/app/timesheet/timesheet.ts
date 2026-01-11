@@ -48,25 +48,14 @@ export class Timesheet implements OnInit{
                 this.timesheet.project=data.project;
                 this.timesheet.loggedHr=data.loggedHr;
                 this.timesheet.username=data.username;
-                //this.timesheet.loginDate=new Date(data.loginDate).toISOString();
-                console.log("login date from server: "+data.loginDate);
                 this.timesheet.loginDate = formatDate(new Date(data.loginDate), 'yyyy-MM-dd',this.locale);
-                console.log("retrieved timesheet: "+this.timesheet.project+" "+
-                    this.timesheet.loggedHr+" "+this.timesheet.loginDate);
                     this.cdr.markForCheck();
             });
         }
     }
 
     saveTimesheet(){
-        if(this.id==-1){
-            //const dateObject=new Date(this.timesheet.loginDate)
-            //const isoDateString=dateObject.toISOString();
-
-            //const isoStringLocal = dateObject.toISOString().slice(0, 10);
-            //console.log(isoStringLocal);
-        
-            
+        if(this.id==-1){ 
             this.timesheetService.createTimesheet(this.username,this.timesheet)
             .subscribe(()=>{
                 this.router.navigate(['timesheets'])

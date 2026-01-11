@@ -13,9 +13,12 @@ import { AsyncPipe } from '@angular/common';
 })
 export class Menu implements OnInit {
   isLoggedIn$:Observable<boolean>;
+  userRole:string|null="";
   
   constructor(private route:Router, public basicAuthenticationService:BasicAuthenticationService){
-    this.isLoggedIn$=this.basicAuthenticationService.isLoggedIn$
+    this.isLoggedIn$=this.basicAuthenticationService.isLoggedIn$;
+    //this.userRole=this.basicAuthenticationService.getUseRole();
+    //console.log("user role",this.userRole);
   }
   ngOnInit(){
     }

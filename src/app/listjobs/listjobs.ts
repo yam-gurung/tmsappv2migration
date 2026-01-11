@@ -12,6 +12,7 @@ import {Router} from '@angular/router';
 export class ListJobs implements OnInit{
 
     username!:string|null;
+    jobList!:string[];
 
     constructor(private jobDataService: JobDataService,
         private basicAuthService:BasicAuthenticationService,
@@ -19,18 +20,25 @@ export class ListJobs implements OnInit{
     ){}
 
     ngOnInit(){
+        this.jobList=['Timesheets','Roles Data Load'];
         this.username=this.basicAuthService.getAuthenticatedUser(); 
     }
 
-    executeJob(){
-        this.jobDataService.executeDailyTimesheetReportJob(this.username).subscribe(
+    executeTimesheetJob(){
+        this.jobDataService.executeDailyTimesheetReportJob(this.username).subscribe({
+            next:
             (response)=>{
                 console.log(response);
                 this.route.navigate(['jobsuccess']);
             },
-            (error)=>{
+            error:(error)=>{
                 console.log(error);
-            }
-        );
+            },complete:()=>{}
+    });
     }
+
+    executeRolesDataLoadJob() {
+        
+    }
+
 }

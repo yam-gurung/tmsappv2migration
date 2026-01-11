@@ -1,4 +1,4 @@
-<H1>Add User</H1>
+<H1 class="text-center">Add User</H1>
 <div class="container">
 <form (ngSubmit)="signup()">
     <fieldset class="form-group">
@@ -36,7 +36,7 @@
     <fieldset class="form-group">
         <label for="rolename">Role</label>
         <select name="role" id="roleId" class="form-control" [(ngModel)]="securityUser.rolename">
-            <option [value]="securityUser.rolename" disabled selected>SELECT AN OPTION</option>
+            <option [value]="" disabled selected>SELECT AN OPTION</option>
             @for (role of roles;track role){
             <option [value]="role.roleName">{{role.description}}</option>
             }

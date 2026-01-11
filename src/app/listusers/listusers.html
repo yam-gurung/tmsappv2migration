@@ -1,1 +1,30 @@
-<p>List Users works!</p>
+<H1 class="text-center">Users</H1>
+<div class="container">
+<table class="mat-table" width="100%">
+    <thead>
+        <th>Username</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>RoleName</th>
+    </thead>
+    <tbody>
+    
+    @for (item of users; track item){
+        <tr>
+            <td>{{item.username}}</td>
+            <td>{{item.firstName}}</td>
+            <td>{{item.lastName}}</td>
+            <td>{{item.roles[0].roleName}}</td>
+        </tr>
+    }
+</tbody>
+</table>
+<mat-paginator
+[pageSizeOptions]="[5,10,15]"
+[pageSize]="5"
+[length]="totalElements"
+(page)="nextPage($event)"
+>
+</mat-paginator>
+</div>
+
