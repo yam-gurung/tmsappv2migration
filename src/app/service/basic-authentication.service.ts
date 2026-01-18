@@ -45,7 +45,7 @@ export class BasicAuthenticationService{
         }
     }
 
-    getUseRole(){
+    getUserRole(){
         return sessionStorage.getItem(ROLE);
     }
 

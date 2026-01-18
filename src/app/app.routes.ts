@@ -11,6 +11,7 @@ import {RouteGuardService} from './service/route-guard.service';
 import { ListJobs } from './listjobs/listjobs';
 import {JobSuccess} from './jobsuccess/jobsuccess';
 import { ListUsers } from './listusers/listusers';
+import {ListAllEmployeesTimesheets} from './listallemployeestimesheets/listallemployeestimesheets'
 
 export const routes: Routes = [
     {path:"",component:Login},
@@ -23,6 +24,7 @@ export const routes: Routes = [
     {path:'users',component:ListUsers,canActivate:[RouteGuardService]},
     {path:'timesheets',component:ListTimesheets,canActivate:[RouteGuardService]},
     {path:'timesheets/:id',component:Timesheet,canActivate:[RouteGuardService]},
+    {path:'allemployeestimesheets',component:ListAllEmployeesTimesheets,canActivate:[RouteGuardService]},
     {path:'jobs',component:ListJobs,canActivate:[RouteGuardService]},
     {path:'**',component:ErrorComponent}
 ];

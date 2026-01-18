@@ -6,6 +6,12 @@
     <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-8">
+            Project: <input type="text" [(ngModel)]="project" name="project">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-8">
             From Date: <input  type="date" [ngModel]="startDate | date:'yyyy-MM-dd'"
             (ngModelChange)="startDate=$event" name="startDate">
             To Date: <input  type="date" [ngModel]="endDate | date:'yyyy-MM-dd'"
@@ -31,6 +37,8 @@
             <th class="mat-header-cell">ID</th>
             <th class="mat-header-cell">Project</th>
             <th class="mat-header-cell">Logged Date</th>
+            <th class="mat-header-cell">From Time</th>
+            <th class="mat-header-cell">To Time</th>
             <th class="mat-header-cell">Logged Hr</th>
             <th class="mat-header-cell">Update</th>
             <th class="mat-header-cell">Delete</th>
@@ -42,6 +50,8 @@
            <td class="mat-cell">{{timesheet.id}}</td>
             <td class="mat-cell">{{timesheet.project}}</td>
             <td class="mat-cell">{{timesheet.loginDate|date:'yyyy-MM-dd'}}</td>
+            <td class="mat-cell">{{timesheet.fromTime}}</td>
+            <td class="mat-cell">{{timesheet.toTime}}</td>
             <td class="mat-cell">{{timesheet.loggedHr}}</td>
             <td><button (click)="updateTimesheet(timesheet.id)"
             class="btn btn-success">Update</button></td>
@@ -55,6 +65,7 @@
 [pageSize]="10"
 [length]="totalElements"
 (page)="nextPage($event)"
+arial-label="select page"
 >
 
 </mat-paginator>

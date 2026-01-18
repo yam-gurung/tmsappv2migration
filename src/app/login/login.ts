@@ -35,8 +35,9 @@ export class Login implements OnInit {
         this.invalidLogin=false;
       },
       error:(error)=>{
-        console.log("error log "+error);
+        console.log("error log "+error.error);
         this.invalidLogin=true;
+        this.errorMessage=error.error;
         this.cdr.markForCheck();;
       },
       complete:()=>{

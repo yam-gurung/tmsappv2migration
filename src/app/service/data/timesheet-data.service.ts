@@ -4,12 +4,15 @@ import {JPA_API_URL} from '../../app.constants';
 import {TimesheetDTO, TimesheetResponseDTO} from '../../listtimesheets/listtimesheets';
 import { formatDate } from '@angular/common';
 import { TimesheetRequest } from '../../interfaces/timesheetrequest.interface';
+import { BasicAuthenticationService } from '../basic-authentication.service';
 
 @Injectable({
     providedIn:'root'
 })
 export class TimeSheetDataService{
-    constructor(private http:HttpClient){}
+    constructor(private http:HttpClient,
+        private basicAuthenticationService:BasicAuthenticationService
+    ){}
 
     retrieveAllTimeSheets(username:any){
         return this.http.get<TimesheetResponseDTO[]>(
@@ -20,6 +23,7 @@ export class TimeSheetDataService{
     listTimesheets(username:any,request:any){
         const params = request;
         console.log("params in service: "+request.startDate+" "+request.endDate);
+        
         return this.http.get<any>(
             `${JPA_API_URL}/users/${username}/timesheets`,
             {params}
@@ -54,6 +58,7 @@ export class TimeSheetDataService{
         timesheet.loginDate = formatDate(timesheet.loginDate, 'yyyy-MM-ddTHH:mm:ss.sssZ', 'en-US');
 
         console.log("timesheet loginDate in service: "+timesheet.loginDate)
+        console.log("fromTime: "+timesheet.fromTime+" toTime: "+timesheet.toTime);
         return this.http.post(
             `${JPA_API_URL}/users/${username}/timesheets`,
             timesheet

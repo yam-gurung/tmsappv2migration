@@ -37,8 +37,34 @@ export class ListJobs implements OnInit{
     });
     }
 
+    executeDailyUserReportJob(){
+        this.jobDataService.executeDailyUserReportJob(this.username).subscribe({
+            next:(response)=>{
+                console.log(response);
+                this.route.navigate(['jobsuccess']);
+            },
+            error:(error)=>{
+                console.log(error);
+            },
+            complete:()=>{
+                console.log("Daily User Report Job execution completed.");
+            }
+        });
+    }
+
     executeRolesDataLoadJob() {
-        
+        this.jobDataService.executeRolesDataLoadJob(this.username).subscribe({
+            next:(response)=>{
+                console.log(response);
+                this.route.navigate(['jobsuccess']);
+            },
+            error:(error)=>{
+                console.log(error);
+            }
+            ,complete:()=>{
+                console.log("Roles Data Load Job execution completed.")
+            }
+        });
     }
 
 }

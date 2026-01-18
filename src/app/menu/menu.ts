@@ -16,11 +16,15 @@ export class Menu implements OnInit {
   userRole:string|null="";
   
   constructor(private route:Router, public basicAuthenticationService:BasicAuthenticationService){
+    console.log("menu called on statup constructor")
     this.isLoggedIn$=this.basicAuthenticationService.isLoggedIn$;
+    console.log("logged in value "+this.isLoggedIn$)    
     //this.userRole=this.basicAuthenticationService.getUseRole();
     //console.log("user role",this.userRole);
   }
   ngOnInit(){
+        console.log("menu called on statup method ngOnInit()")
+
     }
 
     logout(){

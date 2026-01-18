@@ -1,0 +1,48 @@
+<div class="container text-center">
+    <h1>List All Employees Timesheets</h1>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-8">
+            Name: <input type="text" name="searchName" [(ngModel)]="userName">
+            Project: <input type="text" name="searchProject" [(ngModel)]="project">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-8">
+            From Date: <input type="date" name="startDate" [ngModel]="startDate | date:'yyyy-MM-dd'" (ngModelChange)="startDate=$event">
+            To Date: <input type="date" name="endDate" [ngModel]="endDate | date:'yyyy-MM-dd'" (ngModelChange)="endDate=$event">
+            <button class="btn btn-success" (click)="searchResult()">Apply</button>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <table class="mat-table" width="100%">
+        <thead>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Project</th>
+            <th>Login date</th>
+            <th>Logged hr</th>
+        </thead>
+
+        <tbody>
+        @for (timesheet of filteredTimesheets; track timesheet.id){
+            <tr>
+                <td>{{timesheet.id}}</td>
+                <td>{{timesheet.username}}</td>
+                <td>{{timesheet.project}}</td>
+                <td>{{timesheet.loginDate | date:'yyyy-MM-dd'}}</td>
+                <td>{{timesheet.loggedHr}}</td>
+            </tr>}
+        </tbody>
+    </table>
+    <mat-paginator
+    [pageSizeOptions]="[10,25,100]"
+    [pageSize]="10"
+    [length]="totalElements"
+    (page)="nextPage($event)">
+    </mat-paginator>
+</div>

@@ -39,7 +39,7 @@ export class Timesheet implements OnInit{
     // Use formatDate to ensure the format is strictly 'yyyy-MM-dd' iso format
     // 'en-US' locale is used as an example, you might adjust it based on your app's locale
 
-        this.timesheet=new TimesheetDTO(this.id,'',formatDate(new Date(), 'yyyy-MM-ddTHH:mm:ss.sssZ', 'en-US'),0,"");
+        this.timesheet=new TimesheetDTO(this.id,'',formatDate(new Date(), 'yyyy-MM-ddTHH:mm:ss.sssZ', 'en-US'),"","",0,"");
         this.username=this.basicAuthenticationService.getAuthenticatedUser();
         if(this.id!=-1){
             this.timesheetService.retrieveTimesheet(this.username,this.id)
@@ -49,6 +49,8 @@ export class Timesheet implements OnInit{
                 this.timesheet.loggedHr=data.loggedHr;
                 this.timesheet.username=data.username;
                 this.timesheet.loginDate = formatDate(new Date(data.loginDate), 'yyyy-MM-dd',this.locale);
+                this.timesheet.fromTime=data.fromTime;
+                this.timesheet.toTime=data.toTime;
                     this.cdr.markForCheck();
             });
         }

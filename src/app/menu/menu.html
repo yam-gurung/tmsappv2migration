@@ -25,10 +25,13 @@
           >My Accounts</a
         >
         <ul ngbDropdownMenu aria-labelledby="navbarDropdown">
-         @if (this.basicAuthenticationService.getUseRole() == 'ROLE_ADMIN') {<li><a class="dropdown-item" routerLink="/signup">Signup</a></li>}
+         @if (this.basicAuthenticationService.getUserRole() == 'ROLE_ADMIN') {<li><a class="dropdown-item" routerLink="/signup">Signup</a></li>}
           <li><a class="dropdown-item" routerLink="/timesheets">Timesheets</a></li>
-         @if (this.basicAuthenticationService.getUseRole() == 'ROLE_ADMIN') {<li><a class="dropdown-item" routerLink="/users">Users</a></li>}
-         @if (this.basicAuthenticationService.getUseRole() == 'ROLE_ADMIN') {<li><a class="dropdown-item" routerLink="/jobs">Jobs</a></li>}
+         @if (this.basicAuthenticationService.getUserRole() == 'ROLE_ADMIN'){
+          <li><a class="dropdown-item" routerLink="/allemployeestimesheets">All Employees Timesheets</a></li>
+         }
+         @if (this.basicAuthenticationService.getUserRole() == 'ROLE_ADMIN') {<li><a class="dropdown-item" routerLink="/users">Users</a></li>}
+         @if (this.basicAuthenticationService.getUserRole() == 'ROLE_ADMIN') {<li><a class="dropdown-item" routerLink="/jobs">Jobs</a></li>}
           <li><button class="dropdown-item" (click)="logout()">Logout</button></li>
         </ul>
       </li>}@else{

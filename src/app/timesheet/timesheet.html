@@ -1,5 +1,7 @@
 <H1 class="text-center">Timesheet</H1>
 <div class="container">
+    <div class="row">
+        <div class="col-md-6">
     <form (ngSubmit)="saveTimesheet()">
         <fieldset class="form-group">
             <label>Project</label>
@@ -28,6 +30,22 @@
             required/>
         </fieldset>
         <fieldset>
+            <label>From:</label>
+            <input type="time"
+            [(ngModel)]="timesheet.fromTime"
+            class="form-control"
+            name="fromTime"
+            required/>
+        </fieldset>
+        <fieldset>
+            <label>To:</label>
+            <input type="time"
+            [(ngModel)]="timesheet.toTime"
+            class="form-control"
+            name="toTime"
+            required/>
+        </fieldset>
+        <fieldset>
             <label>Logged Hr</label>
             <input type="number"
             [(ngModel)]="timesheet.loggedHr"
@@ -38,4 +56,6 @@
 
         <button type="submit" class="btn btn-success">Save</button>
     </form>
+    </div>
+    </div>
 </div>

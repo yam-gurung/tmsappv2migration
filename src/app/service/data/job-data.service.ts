@@ -12,4 +12,14 @@ export class JobDataService{
         console.log('executing job for user:',username);
         return this.http.post(`${API_URL}/jobs/${username}/timesheet`,{})
     }
+
+    executeDailyUserReportJob(username:any){
+        console.log('executing daily user report job for user',username);
+        return this.http.post(`${API_URL}/jobs/${username}/user`,{});
+    }
+
+    executeRolesDataLoadJob(username:any){
+        console.log('executing roles data load job for user',username);
+        return this.http.post(`${API_URL}/jobs/${username}/role`,{});
+    }
 }

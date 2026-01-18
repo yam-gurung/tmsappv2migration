@@ -1,11 +1,10 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import { TimeSheetDataService } from '../service/data/timesheet-data.service';
 import { Router,ActivatedRoute } from '@angular/router';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
-import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent,MatPaginator } from '@angular/material/paginator';
 import { DatePipe,formatDate } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { HttpParams } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 export class TimesheetDTO{
@@ -13,6 +12,8 @@ export class TimesheetDTO{
         public id:number,
         public project:string,
         public loginDate:string,
+        public fromTime:string,
+        public toTime:string,
         public loggedHr:number,
         public username?:string
     ){}
@@ -23,7 +24,10 @@ export class TimesheetResponseDTO{
         public id:number,
         public project:string,
         public loginDate:Date,
-        public loggedHr:number
+        public fromTime:string,
+        public toTime:string,
+        public loggedHr:number,
+        public username?:string
     ){}
 }
 
@@ -48,18 +52,21 @@ export class ListTimesheets implements OnInit{
     loading!:boolean;
     totalElements:number=0;
     private routeSub!:Subscription;
-
     timesheets!:TimesheetResponseDTO[];
     filteredTimesheets!:any;
-    //startDate=formatDate(new Date(),'yyyy-MM-ddTHH:mm:ss.sssZ','en-US');
-    //endDate=formatDate(new Date(),'yyyy-MM-ddTHH:mm:ss.sssZ','en-US');
     startDate!:string;
     endDate!:string;
+    project!: string;
+    searchStartDate!:string;
+    searchEndDate!:string;
+    searchProject!:string;
 
     ngOnInit(){
         this.username=this.basicAuthenticationService.getAuthenticatedUser();
         this.getTimesheets({page:"0",size:"10"});
     }
+
+    @ViewChild(MatPaginator) paginator!:MatPaginator;
 
     filter(query:Date|any){
         this.filteredTimesheets=query?
@@ -88,13 +95,20 @@ export class ListTimesheets implements OnInit{
     }
 
     nextPage(event:PageEvent){
-        if(this.startDate && this.endDate){
-            this.startDate=formatDate(this.startDate,'yyyy-MM-ddTHH:mm:ss.sssZ','en-US');
-            this.endDate=formatDate(this.endDate,'yyyy-MM-ddTHH:mm:ss.sssZ','en-US');
-            this.getTimesheets({startDate:this.startDate,
-                endDate:this.endDate,
+        
+        if(this.searchStartDate && this.searchEndDate && this.searchProject){
+             this.searchStartDate=formatDate(this.searchStartDate,'yyyy-MM-ddTHH:mm:ss.sssZ','en-US');
+            this.searchEndDate=formatDate(this.searchEndDate,'yyyy-MM-ddTHH:mm:ss.sssZ','en-US');
+            this.getTimesheets({startDate:this.searchStartDate,endDate:this.searchEndDate,project:this.searchProject,page:event.pageIndex,size:event.pageSize});
+        }else if(this.searchStartDate && this.searchEndDate){
+            this.searchStartDate=formatDate(this.searchStartDate,'yyyy-MM-ddTHH:mm:ss.sssZ','en-US');
+            this.searchEndDate=formatDate(this.searchEndDate,'yyyy-MM-ddTHH:mm:ss.sssZ','en-US');
+            this.getTimesheets({startDate:this.searchStartDate,
+                endDate:this.searchEndDate,
                 page:event.pageIndex,size:event.pageSize
             })
+        }else if(this.searchProject){
+            this.getTimesheets({project:this.searchProject,page:event.pageIndex,size:event.pageSize});
         }else{
         this.getTimesheets({page:event.pageIndex,size:event.pageSize});
         }
@@ -121,25 +135,46 @@ export class ListTimesheets implements OnInit{
         if(this.routeSub){
             this.routeSub.unsubscribe();
         }
-
     }
 
     searchResult() {
-        console.log("search called"+this.startDate+" "+this.endDate);
-        if(this.startDate && this.endDate){
-            this.startDate=formatDate(this.startDate,'yyyy-MM-ddTHH:mm:ss.sssZ','en-US');
-        this.endDate=formatDate(this.endDate,'yyyy-MM-ddTHH:mm:ss.sssZ','en-US');
-        console.log("formated date "+this.startDate+" "+this.endDate);
+    
+        this.searchStartDate=this.startDate;
+        this.searchEndDate=this.endDate;
+        this.searchProject=this.project;
+       
+        if(this.paginator){
+            this.paginator.firstPage();
+        }
         
-            this.getTimesheets({startDate:this.startDate,
-            endDate:this.endDate,page:"0",size:"10"});
+        console.log("search called"+this.startDate+" "+this.endDate);
+
+        if(this.searchStartDate && this.searchEndDate){
+            this.searchStartDate=formatDate(this.searchStartDate,'yyyy-MM-ddTHH:mm:ss.sssZ','en-US');
+            this.searchEndDate=formatDate(this.searchEndDate,'yyyy-MM-ddTHH:mm:ss.sssZ','en-US');
+      
+        }
+        
+        if(this.searchStartDate && this.searchEndDate && this.searchProject){
+     
+        console.log("formated date "+this.searchStartDate+" "+this.searchEndDate+" project "+this.searchProject);
+        
+        this.getTimesheets({startDate:this.searchStartDate,endDate:this.searchEndDate,
+            project:this.searchProject,page:"0",size:"10"});
+
+        }
+        else if(this.searchStartDate && this.searchEndDate){ 
+            this.getTimesheets({startDate:this.searchStartDate,
+            endDate:this.searchEndDate,page:"0",size:"10"});
+
+    }else if(this.searchProject){
+        
+        console.log("project "+this.project);
+        this.getTimesheets({project:this.searchProject,page:"0",size:"10"});
+
     }else{
             this.getTimesheets({page:"0",size:"10"});
         }
-        
-
-        
-
     }
 
 }
